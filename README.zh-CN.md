@@ -107,6 +107,17 @@ python -m pytest tests/distributed -q
 
 如果 Aster 对你的学习或项目有帮助，欢迎[点一个 ⭐ Star](https://github.com/sutiankang/aster)，让更多人发现这个项目。也欢迎分享你的使用场景和建议。
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=sutiankang%2Faster&amp;type=date&amp;legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=sutiankang/aster&amp;type=date&amp;theme=dark&amp;legend=top-left&amp;sealed_token=MXuvH6lDouerBkulGFKjPEiHgmv23NAZopEDUhWLnRlbAiZZcun53-YWdB_efQw7pMSHPkPb9UtruD_gvL6vU4lt7CxdGHHcx2vn8-d_70LBPI5D4_WsQexE_eJyKKaYJyYQdMZqe6Hx1PG012VLGbZn9bUiIdcHCMFcggAEthqAeQRY0iwE6Lya3Lp3" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=sutiankang/aster&amp;type=date&amp;legend=top-left&amp;sealed_token=MXuvH6lDouerBkulGFKjPEiHgmv23NAZopEDUhWLnRlbAiZZcun53-YWdB_efQw7pMSHPkPb9UtruD_gvL6vU4lt7CxdGHHcx2vn8-d_70LBPI5D4_WsQexE_eJyKKaYJyYQdMZqe6Hx1PG012VLGbZn9bUiIdcHCMFcggAEthqAeQRY0iwE6Lya3Lp3" />
+    <img alt="Aster 的 GitHub Star 增长曲线" src="https://api.star-history.com/chart?repos=sutiankang/aster&amp;type=date&amp;legend=top-left&amp;sealed_token=MXuvH6lDouerBkulGFKjPEiHgmv23NAZopEDUhWLnRlbAiZZcun53-YWdB_efQw7pMSHPkPb9UtruD_gvL6vU4lt7CxdGHHcx2vn8-d_70LBPI5D4_WsQexE_eJyKKaYJyYQdMZqe6Hx1PG012VLGbZn9bUiIdcHCMFcggAEthqAeQRY0iwE6Lya3Lp3" />
+  </picture>
+</a>
+
+
 ## 来源与许可
 
 算法作者、官方工程和本地实现对应关系见[算法索引](docs/ALGORITHMS.md)。借鉴不代表官方背书。
