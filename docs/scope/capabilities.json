@@ -1,0 +1,3499 @@
+{
+  "schema_version": 1,
+  "baseline_date": "2026-08-30",
+  "status": "implementation_in_progress",
+  "policy": "All entries required. Native implementations and evidence are tracked separately. An unverified source-admitted extension cannot be claimed supported. Add newly identified requirements; never remove silently.",
+  "capabilities": [
+    {
+      "id": "core.config",
+      "title": "Strict typed configuration and migration",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/config.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_decoder.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "core.capabilities",
+      "title": "Compatibility checks and implementation evidence ledger",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "unverified",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/core/coverage.py"
+      ],
+      "tests": [],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "core.artifacts",
+      "title": "Immutable model/processor artifacts and lineage",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/core/artifacts.py",
+        "docs/TESTING.md"
+      ],
+      "tests": [
+        "tests/unit/test_core.py",
+        "tests/integration/test_recipe_chain.py",
+        "tests/unit/test_artifact_long_paths.py",
+        "tests/integration/test_genie_generation_evaluation.py"
+      ],
+      "notes": "Immutable content-addressed artifacts and containment/link/integrity checks. Native filesystem path canonicalization handles Windows >260-character source/store paths without changing relative artifact identities; a previously unreadable 274-character tensor was verified without mutation. Independent immutable 486-file integration snapshot: 22 tests passed with deliberately long paths, including Genie/Wan and recipe reentry. This is ArtifactStore support, not a guarantee for every external library or all network filesystems."
+    },
+    {
+      "id": "core.checkpoint",
+      "title": "Atomic complete checkpoints and integrity",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/state.py",
+        "src/aster/training/trainer.py",
+        "src/aster/training/provenance.py",
+        "src/aster/core/update_provenance.py",
+        "src/aster/models/serialization.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py",
+        "tests/unit/test_training_provenance.py",
+        "tests/distributed/test_training_provenance_distributed.py",
+        "tests/unit/test_models_runtime_buffers.py"
+      ],
+      "notes": "Native atomic complete Trainer checkpoints and portable layouts, role-specific successful objective receipts, shared model save/load. Nonpersistent semantic buffers now preserved independently so BF16-rounded RoPE state is not silently recomputed at another precision. Receipts certify the last successful update, not an entire training history. Exact same-profile unit/distributed restore tested; arbitrary cross-topology state migration, fault-tolerant multinode recovery and all stateful provider profiles remain unverified."
+    },
+    {
+      "id": "core.events",
+      "title": "Structured events, run manifests and provenance",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/core/workflow.py",
+        "src/aster/agents/events.py"
+      ],
+      "tests": [
+        "tests/integration/test_recipe_chain.py",
+        "tests/unit/test_agents.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "core.sources",
+      "title": "Pinned official source, file hash, license and oracle environment",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/core/sources.py",
+        "docs/TESTING.md"
+      ],
+      "tests": [
+        "tests/unit/test_core.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "data.tokenizers",
+      "title": "Native byte/BPE/WordPiece/Unigram vocabulary and templates",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/tokenization.py",
+        "src/aster/data/datasets.py"
+      ],
+      "tests": [
+        "tests/unit/test_data.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "data.streaming",
+      "title": "Indexed/sharded text and JSONL with resumable cursors",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/tokenization.py",
+        "src/aster/data/datasets.py"
+      ],
+      "tests": [
+        "tests/unit/test_data.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "data.packing",
+      "title": "Causal document packing, variable lengths and valid loss masks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/tokenization.py",
+        "src/aster/data/datasets.py"
+      ],
+      "tests": [
+        "tests/unit/test_data.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "data.mixing",
+      "title": "Deterministic weighted mixing, shuffling, deduplication and split audit",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/pretraining.py"
+      ],
+      "tests": [
+        "tests/unit/test_pretraining.py"
+      ],
+      "notes": "Native deterministic weighted mixture, MLM/T5 transforms and normalization/deduplication; web-scale filtering and every corpus protocol remain unvalidated."
+    },
+    {
+      "id": "data.multimodal",
+      "title": "Image/video grids, temporal positions and placeholder alignment",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/tensors.py"
+      ],
+      "tests": [
+        "tests/integration/test_tensor_recipes.py"
+      ],
+      "notes": "Memory-mapped nested tensor dataset and preprocessing fingerprints feed shared training; not every image/video/audio processor is implemented."
+    },
+    {
+      "id": "data.episodes",
+      "title": "Episode data, action units, normalizers and terminal/truncation",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/actions.py"
+      ],
+      "tests": [
+        "tests/unit/test_world_actions.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "data.replay",
+      "title": "Replay/memory banks with RNG and cursor",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/replay.py"
+      ],
+      "tests": [
+        "tests/unit/test_reinforcement.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "data.rollouts",
+      "title": "Token/action trajectories, policy versions, logprobs and role masks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.normalization",
+      "title": "LayerNorm/RMSNorm and gated/dense MLP",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/normalization.py",
+        "src/aster/nn/position.py",
+        "src/aster/nn/attention.py",
+        "src/aster/models/decoder.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.positions",
+      "title": "Absolute, relative, RoPE, long-context scaling and multi-axis positions",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/normalization.py",
+        "src/aster/nn/position.py",
+        "src/aster/nn/attention.py",
+        "src/aster/models/decoder.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.attention",
+      "title": "MHA/MQA/GQA, dense/prefix/sliding/block masks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/normalization.py",
+        "src/aster/nn/position.py",
+        "src/aster/nn/attention.py",
+        "src/aster/models/decoder.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.mla",
+      "title": "MLA compressed states and absorbed/reference paths",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/latent_attention.py",
+        "src/aster/nn/experts.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.sparse_attention",
+      "title": "Learned indexer and compressed sparse attention variants",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/sparse.py",
+        "src/aster/methods/sparse_indexer.py",
+        "src/aster/nn/latent_attention.py",
+        "examples/dsa_pipeline.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_sparse_parity.py",
+        "tests/unit/test_dsa_training.py",
+        "tests/integration/test_dsa_pipeline.py"
+      ],
+      "notes": "Native DeepSeek DSA top-k inference and actual main-attention teacher supervision: frozen dense warmup then sparse CE+KL, detached gradient owners, global query counts, pure DP2 x ZeRO0-3, fresh checkpoint and artifact/cache chain tested. Dense probability materialization remains explicit; no sparse GPU kernel/throughput certification."
+    },
+    {
+      "id": "nn.recurrent",
+      "title": "DeltaNet/KDA and state-space recurrent operators",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/delta.py",
+        "src/aster/models/hybrid.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_hybrid_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.moe",
+      "title": "Routed/shared/grouped/hash/latent experts and load balance",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/latent_attention.py",
+        "src/aster/nn/experts.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.residual",
+      "title": "Standard, attention residual and hyper-connection families",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/hyperconnection.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_v4_parity.py"
+      ],
+      "notes": "Native V4 mHC with official forward/gradient parity; hardware fusion and every topology not certified."
+    },
+    {
+      "id": "nn.vision",
+      "title": "Patch encoders, dynamic resolution and video temporal blocks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/vision.py",
+        "src/aster/models/multimodal.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_vision_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.connectors",
+      "title": "Projection, resampler, Q-Former and deep feature injection",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/vision.py",
+        "src/aster/models/multimodal.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_vision_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.unet_dit",
+      "title": "Conditional U-Net, DiT and video factorization",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/generative.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "nn.autoencoder",
+      "title": "VAE/VQ encoders, quantization, latent scale and decode",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/richzhang/PerceptualSimilarity/tree/082bb24f84c091ea94de2867d34c4544f68e0963",
+        "https://github.com/CompVis/latent-diffusion/tree/a506df5756472e2ebaf9078affdde2c4f1502cd4",
+        "https://github.com/CompVis/taming-transformers/tree/3ba01b241669f5ade541ce990f7650a3b8f65318"
+      ],
+      "paths": [
+        "src/aster/models/generative.py",
+        "src/aster/models/perceptual.py",
+        "src/aster/methods/perceptual_autoencoder.py",
+        "docs/PERCEPTUAL_AUTOENCODER.md",
+        "src/aster/models/adversarial.py",
+        "src/aster/methods/adversarial_autoencoder.py",
+        "src/aster/training/gradient_ratio.py",
+        "docs/ADVERSARIAL_AUTOENCODER.md"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py",
+        "tests/unit/test_perceptual.py",
+        "tests/distributed/test_perceptual_distributed.py",
+        "tests/parity/test_lpips_official.py",
+        "tests/unit/test_adversarial_models.py",
+        "tests/unit/test_adversarial_objectives.py",
+        "tests/unit/test_adversarial_method.py",
+        "tests/distributed/test_adversarial_distributed.py",
+        "tests/distributed/test_adversarial_method_distributed.py",
+        "tests/parity/test_patchgan_official.py"
+      ],
+      "notes": "Native KL VAE with stable FP32/expm1 KL, native full-width VGG16/AlexNet LPIPS and strict local weight conversion. Frozen content-bound perceptual role, CompVis NLL broadcast/sum normalization, explicit-noise training, FP32/BF16 and all ZeRO DP2 uneven accumulation/dense update parity/exact restore. Two actual pinned upstream LPIPS class/function oracles executed; random/custom features are not public metric evidence. Native PatchGAN/explicit global ActNorm and integrated two-role perceptual GAN now support hinge/vanilla, global-window decoder-gradient-ratio weighting, warmup optimizer clock, G-then-fresh-D semantics and half-transaction checkpoint rejection. Actual pinned PatchGAN/ActNorm all-gradient oracles and real DP2 all ZeRO full GAN updates/resume; fullbatch SGD/gradient parity and same-gradient independent Adam parity are distinguished from rounding-amplified Adam parameter differences. Remaining: official codec-wide checkpoint imports and public reconstruction/perceptual quality/GPU performance."
+    },
+    {
+      "id": "models.gpt",
+      "title": "GPT-style decoder architecture and pretraining semantics",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/gpt.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_gpt_parity.py"
+      ],
+      "notes": "Native GPT-2 same-weight oracle; other GPT generations require their own public architecture evidence."
+    },
+    {
+      "id": "models.llama",
+      "title": "Llama 2/3/3.1 exact architecture/config mappings",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/normalization.py",
+        "src/aster/nn/position.py",
+        "src/aster/nn/attention.py",
+        "src/aster/models/decoder.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.bert_t5",
+      "title": "BERT bidirectional MLM/NSP and T5 encoder-decoder/span corruption",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/bert.py",
+        "src/aster/models/t5.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_encoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.mistral_mixtral",
+      "title": "Window attention, rolling cache and top-k expert decoder",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/normalization.py",
+        "src/aster/nn/position.py",
+        "src/aster/nn/attention.py",
+        "src/aster/models/decoder.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.qwen",
+      "title": "Qwen2/2.5/3 and verified hybrid attention successors",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/normalization.py",
+        "src/aster/nn/position.py",
+        "src/aster/nn/attention.py",
+        "src/aster/models/decoder.py",
+        "src/aster/models/moe.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.deepseek",
+      "title": "V2/V3/V3.2/V4 distinct MLA/sparse/compressed mechanisms",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/nn/latent_attention.py",
+        "src/aster/nn/experts.py",
+        "src/aster/models/moe.py",
+        "src/aster/models/sparse.py",
+        "src/aster/nn/parameter_codec.py",
+        "src/aster/methods/sparse_indexer.py",
+        "examples/dsa_pipeline.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_decoder_parity.py",
+        "tests/unit/test_training_deepseek.py",
+        "tests/parity/test_models_sparse_parity.py",
+        "tests/unit/test_dsa_training.py",
+        "tests/integration/test_dsa_pipeline.py"
+      ],
+      "notes": "Native MLA absorption and routed V3/V3.2 models, with standard public weight names retained through explicit internal parameter ownership codec. Fixed ZeRO3 raw-weight access and router parameter/buffer ownership; full dense/routed models on pure DP x ZeRO0-3 tested with global gradients, FP32/BF16 AdamW/dropout/offload/EMA/fresh resume and symmetric bad-data rejection. Actual DSA dense-warmup/sparse-training teacher chain and frozen ZeRO3 now tested with DP2, exact resume and native artifacts. Does not certify DeepSeek TP/EP/ETP/PP, dynamic load correction, public pretrained quality or GPU kernel performance."
+    },
+    {
+      "id": "models.kimi",
+      "title": "K2/K2.5/K2.6 and verified successor architecture differences",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/kimi.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_kimi_parity.py"
+      ],
+      "notes": "Public Kimi K2.5/MoonViT implementation and tests. Verified K3 official source has separate required models.kimi_k3 entry; newer families are not treated as old-architecture aliases."
+    },
+    {
+      "id": "models.other_text",
+      "title": "Source-admitted Gemma/OLMo and additional engineering-relevant families",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/families.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_families_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.contrastive",
+      "title": "CLIP/SigLIP style image-text encoders",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/siglip.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_siglip_parity.py"
+      ],
+      "notes": "Native SigLIP and CLIP towers; SigLIP sigmoid pair objective is distinct from CLIP softmax. Large retrieval benchmarks not run."
+    },
+    {
+      "id": "models.vlm_connectors",
+      "title": "LLaVA/BLIP2/Flamingo style multimodal connectivity",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_installed_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/vision.py",
+        "src/aster/models/multimodal.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_vision_parity.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.qwen_vl",
+      "title": "Qwen2.5VL/Qwen3VL/hybrid successors visual and temporal semantics",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/qwen_vl.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_qwen_vl_parity.py"
+      ],
+      "notes": "Native Qwen3-VL dynamic vision, mRoPE and DeepStack with full tested same-weight paths; all historical/new Qwen-VL variants not certified."
+    },
+    {
+      "id": "models.deepseek_vl",
+      "title": "DeepSeek-VL/Janus/OCR distinct understanding/generation paths",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/janus.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_janus_parity.py"
+      ],
+      "notes": "Native public Janus understanding/generation including VQ. This is not evidence for all DeepSeek-VL1/2 checkpoints."
+    },
+    {
+      "id": "models.kimi_vl",
+      "title": "Kimi-VL/K2.5+ visual tower, tiling and multimodal decoder",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/kimi.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_kimi_parity.py"
+      ],
+      "notes": "Kimi K2.5 image path and MoonViT encoder tested; known upstream full-video ragged/temporal interface issues documented."
+    },
+    {
+      "id": "models.other_vlm",
+      "title": "Verified open multimodal families beyond Feishu baseline",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_same_weight_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/gemma4_vl.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_gemma4_vl_parity.py",
+        "tests/unit/test_models_gemma4_vl.py"
+      ],
+      "notes": "Native Gemma4 image/video vision and PLE/text composition has actual Transformers output/all-grad/cache tests. Gemma4 audio/Unified, GLM, InternVL, MiniCPM and other distinct architectures are still separate gaps, not implied by this implementation."
+    },
+    {
+      "id": "models.act",
+      "title": "ACT conditional VAE/action chunk model",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/actions.py",
+        "src/aster/methods/actions.py"
+      ],
+      "tests": [
+        "tests/unit/test_world_actions.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.diffusion_policy",
+      "title": "Conditional diffusion/flow action policy",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/policies.py"
+      ],
+      "tests": [
+        "tests/unit/test_policies.py"
+      ],
+      "notes": "Native conditional 1D UNet diffusion policy; real robot task scores remain unevaluated."
+    },
+    {
+      "id": "models.openvla",
+      "title": "OpenVLA-style multimodal action token policy",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/openvla.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_openvla.py"
+      ],
+      "notes": "Native DINOv2-reg4 plus SigLIP fusion, Prismatic projector, BOS insertion, action tokens and quantile inverse normalization. Real small-model train/cache/action/save-load and compositional same-weight oracle passed, not old upstream package end-to-end execution or public robot score."
+    },
+    {
+      "id": "models.pi",
+      "title": "OpenPI published pi0/pi0.5/successor mechanisms",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/pi_vla.py"
+      ],
+      "tests": [
+        "tests/integration/test_pi_vla.py"
+      ],
+      "notes": "Native pi0/pi0.5 SigLIP-image/language prefix, separate action expert, flow objective and cached sampling; no public robot score claim."
+    },
+    {
+      "id": "models.groot",
+      "title": "Public GR00T vision-language-action mechanisms",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/groot.py",
+        "src/aster/methods/groot.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_groot.py",
+        "tests/parity/test_models_groot_parity.py"
+      ],
+      "notes": "Native GR00T N1.7 vision-language/action composition, embodiment branches, alternating attention, flow objective, RTC and cross-attention caching. Nine targeted tests, including full fixture training and exact resume; official-source arithmetic oracle and real Transformers backbone oracle are distinct. No robot/public benchmark run."
+    },
+    {
+      "id": "models.rssm",
+      "title": "Stochastic recurrent dynamics, reward and continuation",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/world.py",
+        "src/aster/methods/world_model.py"
+      ],
+      "tests": [
+        "tests/unit/test_world_actions.py",
+        "tests/integration/test_multirole_methods.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.jepa",
+      "title": "Joint embedding prediction and action-conditioned variants",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/jepa.py"
+      ],
+      "tests": [
+        "tests/unit/test_jepa.py"
+      ],
+      "notes": "Native image/video tubelet JEPA, masked predictor, encoder EMA and exact checkpoint resume. V-JEPA2 action-conditioned architecture remains separate work."
+    },
+    {
+      "id": "models.video_world",
+      "title": "Open action-conditioned video/world generators",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/video_world.py",
+        "src/aster/models/video_vae.py",
+        "src/aster/methods/video_generation.py"
+      ],
+      "tests": [
+        "tests/parity/test_video_wan_formulas.py",
+        "tests/integration/test_video_generation.py"
+      ],
+      "notes": "Native Wan2.1 text/image/first-last-frame video DiT, causal streaming VAE and connected latent training/generation. Six formula/all-gradient, causal, training and resume tests. Euler/Heun are explicit; not claimed official UniPC, full pretrained quality, action-conditioned Cosmos/Genie or all video-world families."
+    },
+    {
+      "id": "models.unet",
+      "title": "Trainable image denoising U-Net",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/generative.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.dit",
+      "title": "Trainable image/video diffusion Transformer",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/generative.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "models.latent_generation",
+      "title": "Complete latent encoder-condition-denoiser-decoder pipeline",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/pipelines.py"
+      ],
+      "tests": [
+        "tests/integration/test_latent_pipeline.py"
+      ],
+      "notes": "Native scaled VAE encode -> field training/sampling -> VAE decode and component save/load; pretrained text conditioning and broad diffusion checkpoints remain open."
+    },
+    {
+      "id": "models.drifting",
+      "title": "Official drifting field, feature/memory-bank and generator",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/lambertae/drifting/blob/main/models/generator.py",
+        "https://github.com/lambertae/drifting/blob/main/drift_loss.py",
+        "https://github.com/lambertae/drifting/blob/main/models/mae_model.py"
+      ],
+      "paths": [
+        "src/aster/models/drifting.py",
+        "src/aster/models/drifting_features.py",
+        "src/aster/methods/drifting.py",
+        "src/aster/methods/masked_autoencoding.py",
+        "src/aster/methods/generative_distillation.py",
+        "src/aster/evaluation/drifting_generation.py",
+        "docs/DRIFTING.md"
+      ],
+      "tests": [
+        "tests/parity/test_drifting_generator_parity.py",
+        "tests/parity/test_drifting_mae_parity.py",
+        "tests/unit/test_drifting_method.py",
+        "tests/unit/test_drifting_mae.py",
+        "tests/distributed/test_drifting_distributed.py"
+      ],
+      "notes": "Native LightningDiT/DitGen, trainable MAE-ResNet, multiscale frozen features, real class/unconditional FIFOs, training CFG inverse-CDF and negative weights, global-DP force statistics, ZeRO0-3/EMA/exact replay and direct generation artifact. FP32/BF16 generator formulas/all gradients; MAE full graph/gradients; true DP2. Tiny conditional learning is not public FID evidence. Still incomplete: production checkpoint mapping, ConvNeXt features, actual JAX oracle, published quality, GPU/multihost performance, model-parallel Drifting and complete license/source-lock audit."
+    },
+    {
+      "id": "training.engine",
+      "title": "Single-owner phased backward/optimizer with weighted global losses",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.optimizers",
+      "title": "Adam/AdamW/SGD and source-admitted Muon optimizer semantics",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/KellerJordan/Muon",
+        "https://github.com/MoonshotAI/Moonlight"
+      ],
+      "paths": [
+        "src/aster/training/optim.py",
+        "src/aster/training/projection.py",
+        "src/aster/training/muon.py",
+        "src/aster/training/optimizer_recipe.py",
+        "src/aster/recipes.py",
+        "examples/recipes/language_muon.json"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/unit/test_training_adam.py",
+        "tests/unit/test_training_projection.py",
+        "tests/unit/test_training_muon.py",
+        "tests/distributed/test_training_muon_distributed.py",
+        "tests/distributed/test_training_muon_causal.py",
+        "tests/unit/test_training_muon_recipe.py",
+        "tests/distributed/test_training_muon_recipe_distributed.py"
+      ],
+      "notes": "Native Adam/AdamW/SGD and Keller/Moonlight Muon+aux Adam groups. Matrix update reconstructs complete logical matrices across TP/DP/ZeRO, preserves embedding/head/1D auxiliary semantics, FQN identity, offload and fresh resume. Full Llama/Qwen2/Qwen3 TP2 x DP1/2 x ZeRO0-3 tested; temporary full-matrix reconstruction/repeated NS is explicit, not distributed-Gram performance equivalence. PP/CP/EP/ETP/GTP Muon unsupported; separate task-row projection guards retained. JSON/CLI language recipes now select explicit Muon profiles, fixed logical FQN groups and separate matrix/auxiliary rates, record source identity, verify full fresh resume and reject unsupported providers before construction. Default AdamW and old no-optimizer recipe identity retained. Actual TP2 ZeRO3 recipe/CLI and original README KD workflow tested."
+    },
+    {
+      "id": "training.precision",
+      "title": "FP32/BF16/FP16/FP8 policies, scaler and global overflow",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.accumulation",
+      "title": "Weighted gradient accumulation and correct tail windows",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.checkpointing",
+      "title": "Activation recomputation with RNG and router replay",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/activation.py"
+      ],
+      "tests": [
+        "tests/unit/test_training_sharing.py"
+      ],
+      "notes": "RNG-preserving activation rematerialization and shared engine lifecycle; not every arbitrary module eligible."
+    },
+    {
+      "id": "training.schedules",
+      "title": "Warmup/decay schedules, EMA and role update counters",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/optim.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py"
+      ],
+      "notes": "Warmup/decay schedule state; algorithm-specific curricula remain explicitly configured."
+    },
+    {
+      "id": "training.dp",
+      "title": "Native synchronous data parallel with uneven valid counts",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.tp",
+      "title": "Column/row/vocabulary tensor parallel and sharded CE",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/causal_parallel.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/trainer.py"
+      ],
+      "tests": [
+        "tests/unit/test_training_causal_provider.py",
+        "tests/distributed/test_training_causal_parallel.py",
+        "tests/distributed/test_training_causal_recipe.py"
+      ],
+      "notes": "Native Llama/Qwen2/Qwen3 providers, column/row/vocabulary TP, QK-norm gradient ownership, KV replication, odd-vocabulary padding, sharded CE, standard checkpoint keys, tied weights and exact resume. Real four-process CLI/TP2PP2/PP2DP2 paths tested. GPU/multihost NCCL performance, hybrid architectures, CP/EP/FP8 provider combinations and all supported upstream model families remain incomplete."
+    },
+    {
+      "id": "training.pp",
+      "title": "Flush, 1F1B and interleaved pipeline schedules",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/pipeline.py",
+        "src/aster/training/causal_pipeline.py",
+        "src/aster/training/causal_parallel.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_causal_pipeline.py",
+        "tests/distributed/test_training_causal_recipe.py",
+        "tests/distributed/test_training_layouts.py"
+      ],
+      "notes": "Actual Llama/Qwen2/Qwen3 pipeline stages, GPipe/1F1B, TP2PP2 and PP2DP2, cross-stage tied embedding/head gradient and optimizer ownership, preflight and standard export. Interleaving operator tests remain separate from complete model-provider certification. Tied PP>2, hybrid/CP/EP/FP8 provider integration, NCCL VPP/multihost performance remain incomplete."
+    },
+    {
+      "id": "training.sp",
+      "title": "Sequence parallel gather/reduce-scatter layouts",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/sequence.py",
+        "src/aster/training/ring.py",
+        "src/aster/training/experts.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_layouts.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.cp",
+      "title": "Context parallel attention and gradients",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/sequence.py",
+        "src/aster/training/ring.py",
+        "src/aster/training/experts.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_layouts.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.ep",
+      "title": "Expert dispatch/combine, router and shared-expert gradient ownership",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/NVIDIA/Megatron-LM/tree/f2f0f7bfd88fcb1243df55275988d6af52daea35"
+      ],
+      "paths": [
+        "src/aster/training/moe_parallel.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/portable.py",
+        "docs/TRAINING.md",
+        "src/aster/training/sequence.py",
+        "src/aster/training/ring.py",
+        "src/aster/training/experts.py",
+        "src/aster/training/moe_tensor_parallel.py",
+        "src/aster/training/recipes.py",
+        "src/aster/cli.py"
+      ],
+      "tests": [
+        "tests/unit/test_training_moe_provider.py",
+        "tests/unit/test_training_moe_official.py",
+        "tests/distributed/test_training_moe_parallel.py",
+        "tests/distributed/test_training_moe_recipe.py",
+        "tests/distributed/test_training_layouts.py",
+        "tests/unit/test_training_moe_tensor_provider.py",
+        "tests/distributed/test_training_moe_tensor.py",
+        "tests/distributed/test_training_moe_tensor_recipe.py"
+      ],
+      "notes": "Native Mixtral EP x ETP x EDP ownership, dispatch/combine, tensor-sharded expert MLPs, separate attention-TP/ETP axes, token/sequence router auxiliary losses, global norms and double-striped export. Real 4/8-process TP1EP2ETP2EDP1, TP2EP2ETP2EDP1 and TP2EP2ETP2EDP2, ZeRO0-3, SGD and AdamW FP32/BF16 CPU/disk offload/EMA, exact native resume and portable-to-dense next update. TP leader router RNG and FP32 CE accumulation for low-precision logits. Independent 443-file training snapshot: 333 passed, 2 environment skips. TP must be 1 or ETP; PP/CP/GTP combinations and TP2 attention dropout explicitly rejected. GPU/NCCL/multihost performance and additional MoE family providers remain unverified."
+    },
+    {
+      "id": "training.gtp",
+      "title": "Generalized/rematerialized tensor layouts as explicit extension",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/gtp.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_gtp.py"
+      ],
+      "notes": "Native independent GTP remat axis with real 4-rank AG/RS/reference updates; no official CUDA ticket/prefetch ABI or quantized AG claim."
+    },
+    {
+      "id": "training.zero1",
+      "title": "Optimizer-state sharding",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.zero2",
+      "title": "Gradient and optimizer-state sharding",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.zero3",
+      "title": "Live parameter gather/release and all-state sharding",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py",
+        "tests/unit/test_dsa_training.py"
+      ],
+      "notes": "Native parameter shards with leaf gather/recompute/reduce-scatter and explicit optimizer ownership. Fully frozen leaves now remain physically sharded, propagate input gradients without parameter gradients or optimizer state; mixed frozen/trainable parameters inside one leaf are still rejected. DSA warmup/sparse phases tested on DP2 x ZeRO0-3. General model/provider/topology and GPU performance limits remain."
+    },
+    {
+      "id": "training.offload",
+      "title": "CPU/NVMe parameter, optimizer and activation offload lifecycle",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/offload.py",
+        "src/aster/training/portable.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_reshard.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.overlap",
+      "title": "Bucket communication/prefetch overlap with correctness",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/communication.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native asynchronous gradient buckets; CUDA communication overlap and throughput not measured."
+    },
+    {
+      "id": "training.reshard",
+      "title": "Portable tensor layout and checkpoint reshard",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/offload.py",
+        "src/aster/training/portable.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_reshard.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "training.multinode",
+      "title": "Launcher, node/rank rendezvous, errors and timeouts",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "unverified",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/launch.py",
+        "src/aster/training/torchrun_compat.py"
+      ],
+      "tests": [
+        "tests/distributed/test_training_recipe_distributed.py",
+        "tests/unit/test_training_launch.py",
+        "tests/distributed/test_training_torchrun.py"
+      ],
+      "notes": "Native and real official torchrun fixed-member launchers tested with two local CPU/Gloo processes. Explicit legacy_tcp rendezvous and worker-client path resolves this Windows wheel's missing libuv without globally patching Torch or silently falling back to the native launcher. Actual multi-host/NCCL and elastic state migration remain unexecuted."
+    },
+    {
+      "id": "training.faults",
+      "title": "Rank-consistent skip/abort, interrupted checkpoint and recovery",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/training/trainer.py",
+        "src/aster/training/parallel.py",
+        "src/aster/training/sharding.py"
+      ],
+      "tests": [
+        "tests/unit/test_training.py",
+        "tests/distributed/test_training_distributed.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.supervised",
+      "title": "CE/MLM/span denoising/contrastive/BC and explicit units",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/supervised.py",
+        "src/aster/methods/actions.py"
+      ],
+      "tests": [
+        "tests/unit/test_methods.py",
+        "tests/unit/test_world_actions.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.preference",
+      "title": "DPO/IPO/ORPO/SimPO and reward-model training",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/preference.py"
+      ],
+      "tests": [
+        "tests/unit/test_methods.py",
+        "tests/unit/test_token_objective_preflight.py",
+        "tests/distributed/test_token_objective_preflight_dp.py"
+      ],
+      "notes": "Native preference implementations in tested domains. Fixed actual DPO/IPO policy-reference subtraction incorrectly inside no_grad; real policy gradient/update and fresh resume covered. Whole-window pure-token preflight for DPO/IPO/SimPO, actual DP2 ZeRO0/3 asymmetric bad-data rejection. Rich-model/PPO/RLOO combinations remain separately unverified."
+    },
+    {
+      "id": "methods.ppo",
+      "title": "PPO/GAE/value/entropy and terminated-truncated semantics",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/reinforcement.py"
+      ],
+      "tests": [
+        "tests/unit/test_reinforcement.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.dqn",
+      "title": "DQN/DoubleDQN/target network and replay",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/reinforcement.py"
+      ],
+      "tests": [
+        "tests/unit/test_reinforcement.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.sac_td3",
+      "title": "SAC/TD3 continuous control, entropy and target updates",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/reinforcement.py"
+      ],
+      "tests": [
+        "tests/unit/test_reinforcement.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.offline_rl",
+      "title": "IQL/CQL/offline policy evaluation protocol",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/aviralkumar2907/CQL"
+      ],
+      "paths": [
+        "src/aster/methods/offline.py",
+        "src/aster/methods/conservative.py",
+        "src/aster/models/conservative.py"
+      ],
+      "tests": [
+        "tests/unit/test_offline.py",
+        "tests/unit/test_conservative.py",
+        "tests/distributed/test_cql_distributed.py"
+      ],
+      "notes": "Native TD3/TD3+BC/IQL plus continuous CQL v2/v3, entropy/dual coefficients, BC warmup and ordinary/max backups. CQL full-step independent-gradient oracle, true unequal-batch DP2 ZeRO0–3, BF16 and exact recovery, synthetic offline reward improvement; public offline benchmark scores not run."
+    },
+    {
+      "id": "methods.grpo",
+      "title": "GRPO-family grouped rollout, clipping and KL",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/reinforcement.py"
+      ],
+      "tests": [
+        "tests/unit/test_reinforcement.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.rl_advances",
+      "title": "Source-admitted DAPO/DrGRPO/RLOO/REINFORCE variants",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/reinforcement.py",
+        "src/aster/methods/policy_gradient.py"
+      ],
+      "tests": [
+        "tests/unit/test_reinforcement.py",
+        "tests/integration/test_policy_gradient.py"
+      ],
+      "notes": "Native RLOO sequence-ratio objective and GRPO current-policy rollout/reward/reference/update/resume loops tested. Online controller is single rank with full-support temperature-one sampling; algorithms with other estimators remain separate requirements."
+    },
+    {
+      "id": "methods.model_based",
+      "title": "Imagined actor/value learning, CEM/MPC and independent evaluation",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/world.py",
+        "src/aster/methods/world_model.py"
+      ],
+      "tests": [
+        "tests/unit/test_world_actions.py",
+        "tests/integration/test_multirole_methods.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.agent_rl",
+      "title": "Verified tool trajectories and multi-turn policy optimization",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/agent_learning.py",
+        "src/aster/agents/agent_rl.py"
+      ],
+      "tests": [
+        "tests/integration/test_agent_learning.py",
+        "tests/integration/test_agents_rl.py"
+      ],
+      "notes": "Verified trajectories/action-only SFT plus real native read-file AgentLoop rollout -> trajectory-sealed GRPO/RLOO -> Trainer and exact between-rollout checkpointing. Native 2-turn tiny Llama task learns; single-rank FP32/raw-softmax scope only, no arbitrary shell/network or generalized tool RL claim."
+    },
+    {
+      "id": "methods.kd_logits",
+      "title": "Forward/reverse/mixed/JS divergences, temperature and masks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/distillation.py"
+      ],
+      "tests": [
+        "tests/unit/test_methods.py",
+        "tests/integration/test_recipe_chain.py",
+        "tests/unit/test_token_objective_preflight.py",
+        "tests/distributed/test_token_objective_preflight_dp.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained. Added admitted pure-token whole-window preflight for real student/teacher contracts, DP2 ZeRO0/3 error symmetry and fresh resume; rich-model domains remain separately bounded."
+    },
+    {
+      "id": "methods.kd_features",
+      "title": "Feature/attention/relation losses and trainable alignment",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/distillation.py"
+      ],
+      "tests": [
+        "tests/unit/test_methods.py",
+        "tests/integration/test_recipe_chain.py",
+        "tests/unit/test_token_objective_preflight.py",
+        "tests/distributed/test_token_objective_preflight_dp.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained. Fixed nested model_inputs padding-mask handling: MSE/cosine/relation feature objectives have equal top-level/nested loss and gradient, padding gradient zero and explicit None equivalence. Pure-token teacher/student contracts and DP2 ZeRO0/3 lifecycle tested; not all rich-model layouts."
+    },
+    {
+      "id": "methods.kd_encoder",
+      "title": "DistilBERT/TinyBERT/MiniLM objectives and stage schedules",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "unverified",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/encoder_distillation.py"
+      ],
+      "tests": [
+        "tests/unit/test_encoder_distillation.py"
+      ],
+      "notes": "Native TinyBERT raw-attention/fit-dense and MiniLMv1/v2 relations; formula checks and ZeRO3 update/export/exact next-step resume passed. Broad pretrained compression quality benchmarks remain unexecuted."
+    },
+    {
+      "id": "methods.kd_sequence",
+      "title": "Offline response/sequence generation, filtering and student training",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/rollout_distillation.py"
+      ],
+      "tests": [
+        "tests/integration/test_rollout_distillation.py"
+      ],
+      "notes": "Native teacher generation, evidence receipts, optional verifier and student retokenization; no fake EOS for truncated sequences."
+    },
+    {
+      "id": "methods.kd_onpolicy",
+      "title": "Student trajectories, teacher scoring and staleness",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/rollout_distillation.py"
+      ],
+      "tests": [
+        "tests/integration/test_rollout_distillation.py"
+      ],
+      "notes": "Native current-student snapshot -> generation -> frozen teacher full-vocab KL -> checkpointed update; TP/PP async rollout orchestration not automatic."
+    },
+    {
+      "id": "methods.kd_multimodal",
+      "title": "Visual/action/world/Agent distillation with explicit alignment",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/multimodal_distillation.py",
+        "src/aster/methods/agent_learning.py"
+      ],
+      "tests": [
+        "tests/integration/test_multimodal_distillation.py",
+        "tests/integration/test_agent_learning.py"
+      ],
+      "notes": "Native typed field/action/feature prediction distillation, aligned same-noise/time and output/processor identity; real LLaVA logits/hidden KD. Verified Agent trajectories support masked SFT/sequence distillation, not on-policy Agent RL. Cross-vocabulary/motion/robot/public-quality coverage not certified."
+    },
+    {
+      "id": "methods.ddpm_ddim",
+      "title": "Discrete diffusion objectives and ancestral/DDIM samplers",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/generation.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.score_sde",
+      "title": "Continuous score/SDE/ODE objectives and solvers",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/solvers.py"
+      ],
+      "tests": [
+        "tests/unit/test_solvers.py"
+      ],
+      "notes": "VP/subVP/VE objectives, reverse SDE/probability-flow and Langevin reference paths."
+    },
+    {
+      "id": "methods.edm",
+      "title": "EDM preconditioning, noise sampling and sampler",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/generation.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.flow",
+      "title": "Conditional/rectified flow and Euler/Heun/ODE methods",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/atong01/conditional-flow-matching/blob/main/torchcfm/conditional_flow_matching.py"
+      ],
+      "paths": [
+        "src/aster/methods/generation.py",
+        "src/aster/methods/stochastic_flow.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py",
+        "tests/unit/test_stochastic_flow.py"
+      ],
+      "notes": "Linear/cosine plus distinct conditional Gaussian/target Gaussian/Brownian bridge paths, native exact/Sinkhorn OT with condition-index synchronization, explicit endpoint smoothing/singularity semantics, DiT + ZeRO3/random exact restore and shared ODE sampling. OT is rank-local microbatch coupling, not global-batch equivalence; no score/SDE bridge or public quality claim."
+    },
+    {
+      "id": "methods.reflow_shortcut",
+      "title": "Reflow/shortcut/mean-flow mechanisms with exact time semantics",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/Gsunshine/meanflow",
+        "https://github.com/kvfrans/shortcut-models"
+      ],
+      "paths": [
+        "src/aster/models/interval_dit.py",
+        "src/aster/methods/meanflow.py",
+        "src/aster/methods/shortcut.py",
+        "src/aster/methods/generative_distillation.py",
+        "docs/INTERVAL_GENERATION.md",
+        "src/aster/evaluation/interval_generation.py",
+        "src/aster/evaluation/generation_gate.py"
+      ],
+      "tests": [
+        "tests/parity/test_interval_dit_parity.py",
+        "tests/unit/test_meanflow.py",
+        "tests/unit/test_shortcut.py",
+        "tests/distributed/test_meanflow_distributed.py",
+        "tests/distributed/test_shortcut_distributed.py",
+        "tests/integration/test_interval_generation_evaluation.py",
+        "tests/unit/test_generation_gate.py"
+      ],
+      "notes": "Native duration/log2-step DiT variants, MeanFlow true forward AD with guided velocity and adaptive weighting, Shortcut globally stratified half-step bootstrap+FM+EMA lifecycle, explicit opposite time directions, shared Trainer DP2/ZeRO0-3 and exact resume. Reflow endpoint-pair primitive exists but full offline pair-data orchestration is still incomplete. Remaining: production checkpoint mapping/quality, iMF/pMF, full production data pipelines, GPU optimization and TP/PP integration; Native train/EMA export, exact opposite-direction sampling, PNG cohorts, actual NFE and source-bound joint quality/performance gates are integrated; CPU learning tests are not public FID."
+    },
+    {
+      "id": "methods.consistency",
+      "title": "Consistency training/distillation and LCM",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/consistency.py",
+        "src/aster/methods/generative_distillation.py",
+        "docs/CONSISTENCY.md"
+      ],
+      "tests": [
+        "tests/unit/test_consistency.py",
+        "tests/unit/test_training_radam.py",
+        "tests/distributed/test_consistency_distributed.py",
+        "tests/integration/test_consistency_official.py"
+      ],
+      "notes": "Native CT/CD/iCT full lifecycle, curriculum, target/EMA/teacher identity, synchronized dropout, explicit time_scale, vector pseudo-Huber and RAdam ZeRO/offload/portable restore. Actual SHA-locked OpenAI loss/all-parameter-gradient runtime oracle and DP2 ZeRO0-3 passed. iCT paper formulas are distinguished from unavailable official training code. Remaining: LCM, NCSN++/paper-specific network/LPIPS recipes, public quality/GPU performance and complete evaluation bridge."
+    },
+    {
+      "id": "methods.progressive",
+      "title": "Progressive few-step distillation with teacher targets",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/solvers.py"
+      ],
+      "tests": [
+        "tests/unit/test_solvers.py"
+      ],
+      "notes": "Native two-DDIM-step teacher to one-step student target; pretrained quality requires independent evaluation."
+    },
+    {
+      "id": "methods.dmd",
+      "title": "DMD/DMD2 multi-role score/generator updates",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/generative_distillation.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py",
+        "tests/integration/test_multirole_methods.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.drifting",
+      "title": "Drifting objectives, stop-grad boundaries and feature-bank updates",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/lambertae/drifting/blob/main/models/generator.py",
+        "https://github.com/lambertae/drifting/blob/main/drift_loss.py",
+        "https://github.com/lambertae/drifting/blob/main/models/mae_model.py"
+      ],
+      "paths": [
+        "src/aster/models/drifting.py",
+        "src/aster/models/drifting_features.py",
+        "src/aster/methods/drifting.py",
+        "src/aster/methods/masked_autoencoding.py",
+        "src/aster/methods/generative_distillation.py",
+        "src/aster/evaluation/drifting_generation.py",
+        "docs/DRIFTING.md"
+      ],
+      "tests": [
+        "tests/parity/test_drifting_generator_parity.py",
+        "tests/parity/test_drifting_mae_parity.py",
+        "tests/unit/test_drifting_method.py",
+        "tests/unit/test_drifting_mae.py",
+        "tests/distributed/test_drifting_distributed.py"
+      ],
+      "notes": "Native LightningDiT/DitGen, trainable MAE-ResNet, multiscale frozen features, real class/unconditional FIFOs, training CFG inverse-CDF and negative weights, global-DP force statistics, ZeRO0-3/EMA/exact replay and direct generation artifact. FP32/BF16 generator formulas/all gradients; MAE full graph/gradients; true DP2. Tiny conditional learning is not public FID evidence. Still incomplete: production checkpoint mapping, ConvNeXt features, actual JAX oracle, published quality, GPU/multihost performance, model-parallel Drifting and complete license/source-lock audit."
+    },
+    {
+      "id": "methods.guidance",
+      "title": "Classifier/classifier-free guidance and conditional dropout",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/generation.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "methods.loss_weighting",
+      "title": "MinSNR/time/loss-aware sampling and EMA",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/generation.py"
+      ],
+      "tests": [
+        "tests/unit/test_generative.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "optimization.lora",
+      "title": "LoRA/QLoRA/DoRA compatible adapters and verified merge",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/distillation.py",
+        "src/aster/inference/adapters.py"
+      ],
+      "tests": [
+        "tests/unit/test_methods.py",
+        "tests/integration/test_recipe_chain.py",
+        "tests/unit/test_online_lora.py"
+      ],
+      "notes": "Native dense Llama/Qwen2/Qwen3 Linear LoRA: shared Trainer A/B export with full base-weight verification, private content-addressed residency, request pinning, whole-model merged-matrix oracle, grouped continuous execution, prefix isolation, cache swapping and actual HTTP/SSE selection. Not online DoRA/QLoRA or TP/PP mixed-adapter kernels.",
+      "native_profile_acceptance": {
+        "status": "implemented_with_independent_tests",
+        "scope": "Native dense Llama/Qwen2/Qwen3 Linear LoRA: shared Trainer A/B export with full base-weight verification, private content-addressed residency, request pinning, whole-model merged-matrix oracle, grouped continuous execution, prefix isolation, cache swapping and actual HTTP/SSE selection. Not online DoRA/QLoRA or TP/PP mixed-adapter kernels.",
+        "policy": "docs/TESTING.md",
+        "hardware_performance": "not_inferred_from_numerical_or_workflow_evidence"
+      }
+    },
+    {
+      "id": "optimization.quantization",
+      "title": "Affine/symmetric/group quantization and packed formats",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/optimization.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference_optimization.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "optimization.gptq_awq",
+      "title": "GPTQ/AWQ/SmoothQuant calibration and transforms",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/optimization.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference_optimization.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "optimization.qat",
+      "title": "Fake-quant training and actual deployable packing",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/optimization/qat.py"
+      ],
+      "tests": [
+        "tests/integration/test_optimization_recovery.py"
+      ],
+      "notes": "Native fake-quant STE training and actual packed conversion, KD/prune/QAT/checkpoint/inference chain; no int4 GPU speed claim."
+    },
+    {
+      "id": "optimization.pruning",
+      "title": "Structured pruning and recovery/KD",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/optimization/pruning.py"
+      ],
+      "tests": [
+        "tests/integration/test_optimization_recovery.py"
+      ],
+      "notes": "Real gated MLP row/column structured pruning with configuration update and KD recovery; not arbitrary architecture/head pruning."
+    },
+    {
+      "id": "optimization.kernels",
+      "title": "Explicit audited attention/MoE/quantized GEMM providers",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/triton-lang/triton/tree/c817b9b63d40ead1ed023b7663f5ea14f676f4bc",
+        "https://github.com/Dao-AILab/flash-attention/tree/060c9188beec3a8b62b33a3bfa6d5d2d44975fab"
+      ],
+      "paths": [
+        "src/aster/training/fp8.py",
+        "src/aster/optimization/fused_attention.py",
+        "src/aster/optimization/_triton_attention.py",
+        "src/aster/inference/paged_attention.py"
+      ],
+      "tests": [
+        "tests/unit/test_training_fp8.py",
+        "tests/unit/test_optimization_fused_attention.py",
+        "tests/distributed/test_fused_attention_training.py",
+        "tests/integration/test_serving_fused_attention.py"
+      ],
+      "notes": "Native online-softmax custom forward/backward, explicit optional Triton fused forward/dQ/dKV and model/Trainer/paged serving wiring. CPU numerical/gradient/linear saved-memory and workflow tests; GPU compilation/performance unexecuted. Paged Triton uses per-page launches plus LSE merge, not vLLM single GPU page-table kernel. FP8 storage/reference retained; no blanket fused MoE/quantized GEMM or TP/PP kernel equivalence."
+    },
+    {
+      "id": "optimization.compile",
+      "title": "Compile and CUDA graph buckets with fallback disclosure",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/optimization/execution.py"
+      ],
+      "tests": [
+        "tests/unit/test_optimization.py"
+      ],
+      "notes": "Native provider delegates only foundational PyTorch compilation; actual CPU aot_eager tested, CUDA graph capture hardware-unverified."
+    },
+    {
+      "id": "optimization.diffusion_cache",
+      "title": "Source-admitted step/token cache approximations and quality guards",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/optimization/step_cache.py"
+      ],
+      "tests": [
+        "tests/unit/test_optimization_step_cache.py"
+      ],
+      "notes": "Real DiT residual reuse with calibration identity, refresh audit, error-trigger disable and final quality-gate requirement. Not full TeaCache reproduction."
+    },
+    {
+      "id": "optimization.transforms",
+      "title": "Executable optimization DAG with data/artifact lineage",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/core/workflow.py",
+        "src/aster/recipes.py"
+      ],
+      "tests": [
+        "tests/integration/test_recipe_chain.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.runner",
+      "title": "Native token/field/recurrent/action runners",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.state",
+      "title": "Typed per-model state codec and lifetime",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py",
+        "src/aster/inference/task_runners.py",
+        "src/aster/inference/gemma4.py",
+        "src/aster/inference/dspark.py",
+        "src/aster/optimization/kv_quantization.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py",
+        "tests/unit/test_inference_stateful_generation.py",
+        "tests/integration/test_dspark_gemma4_pipeline.py",
+        "tests/unit/test_inference_radix.py",
+        "tests/unit/test_hot_kv.py",
+        "tests/unit/test_paged_offload.py"
+      ],
+      "notes": "Wave09 adds actual INT8/E4M3FN/E5M2 hot KV codes/scales, tiled decode, raw-code COW and bounded paged host swapping. Whole-model Llama/Qwen2/Qwen3 and scheduler oracles. Existing typed snapshot/replay families retained; hybrid continuous and distributed combinations remain incomplete.",
+      "native_profile_acceptance": {
+        "status": "implemented_with_independent_tests",
+        "scope": "Wave09 adds actual INT8/E4M3FN/E5M2 hot KV codes/scales, tiled decode, raw-code COW and bounded paged host swapping. Whole-model Llama/Qwen2/Qwen3 and scheduler oracles. Existing typed snapshot/replay families retained; hybrid continuous and distributed combinations remain incomplete.",
+        "policy": "docs/TESTING.md",
+        "hardware_performance": "not_inferred_from_numerical_or_workflow_evidence"
+      }
+    },
+    {
+      "id": "inference.paging",
+      "title": "Physical page allocator and block-table attention",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py",
+        "src/aster/optimization/online_attention.py",
+        "src/aster/inference/paged_attention.py",
+        "src/aster/optimization/kv_quantization.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py",
+        "tests/unit/test_inference_online_attention.py",
+        "tests/integration/test_serving_paged_attention.py",
+        "tests/unit/test_hot_kv.py"
+      ],
+      "notes": "Actual quantized physical pages consumed tile-by-tile without full-history float reconstruction. Independent code/scale/dense-softmax and complete-model numerical parity. Existing native Triton F/B and page-LSE merge remain hardware-unverified, not a single fused GPU page-table implementation.",
+      "native_profile_acceptance": {
+        "status": "implemented_with_independent_tests",
+        "scope": "Actual quantized physical pages consumed tile-by-tile without full-history float reconstruction. Independent code/scale/dense-softmax and complete-model numerical parity. Existing native Triton F/B and page-LSE merge remain hardware-unverified, not a single fused GPU page-table implementation.",
+        "policy": "docs/TESTING.md",
+        "hardware_performance": "not_inferred_from_numerical_or_workflow_evidence"
+      }
+    },
+    {
+      "id": "inference.prefix",
+      "title": "Full-block prefix caching, identity/salt and eviction",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py",
+        "tests/unit/test_inference_radix.py"
+      ],
+      "notes": "Native page-aligned compressed radix tree per complete PrefixIdentity, longest-prefix reuse, ownership-preserving edge split/leaf extension, leaf-LRU eviction, live read lease/COW safety and counters. Randomized independent longest-prefix, tenant/model isolation and concurrency tests. Linear single-path token/page-reference metadata; not SGLang's whole scheduler or hierarchical offload."
+    },
+    {
+      "id": "inference.cow",
+      "title": "Fork/truncate/reorder/copy-on-write without state pollution",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.scheduler",
+      "title": "Continuous batching, fair token/memory budget and preemption",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py",
+        "src/aster/inference/offload.py",
+        "src/aster/inference/adapters.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py",
+        "tests/unit/test_paged_offload.py",
+        "tests/unit/test_online_lora.py"
+      ],
+      "notes": "Native continuous scheduler now swaps paged state through bounded host archive, restores exact codes, explicitly counts host-capacity recompute fallback, and releases cancelled request resources. Online adapters use the same admission/prefix/preemption/finalization chain. Transfer is off-event-loop but awaited; no compute/copy overlap or multi-rank HTTP claims.",
+      "native_profile_acceptance": {
+        "status": "implemented_with_independent_tests",
+        "scope": "Native continuous scheduler now swaps paged state through bounded host archive, restores exact codes, explicitly counts host-capacity recompute fallback, and releases cancelled request resources. Online adapters use the same admission/prefix/preemption/finalization chain. Transfer is off-event-loop but awaited; no compute/copy overlap or multi-rank HTTP claims.",
+        "policy": "docs/TESTING.md",
+        "hardware_performance": "not_inferred_from_numerical_or_workflow_evidence"
+      }
+    },
+    {
+      "id": "inference.chunking",
+      "title": "Chunked prefill and decode mixing with modality boundaries",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.sampling",
+      "title": "Greedy/top-k/top-p/penalties/stops/structured constraints",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/sampling.py",
+        "src/aster/inference/speculative.py",
+        "src/aster/inference/structured.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference_advanced.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.speculative",
+      "title": "Draft/target rejection sampling and state rollback",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/sampling.py",
+        "src/aster/inference/speculative.py",
+        "src/aster/inference/structured.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference_advanced.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.parallel",
+      "title": "TP/PP/DP/EP inference placement and cancellation",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/distributed.py"
+      ],
+      "tests": [
+        "tests/integration/test_serving_distributed.py"
+      ],
+      "notes": "Real sharded TP/PP/DP collective inference tested on three Gloo layouts; supported decoder families explicit."
+    },
+    {
+      "id": "inference.precision",
+      "title": "KV/recurrent/activation quantized state and kernels",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/optimization.py",
+        "src/aster/optimization/kv_quantization.py",
+        "src/aster/inference/paged_attention.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference_optimization.py",
+        "tests/unit/test_hot_kv.py"
+      ],
+      "notes": "True INT8, FP8 E4M3FN/E5M2 per-token/head hot KV with native tiled dequantization; independent scalar/dense/whole-model oracles. Prior weight packing retained. Quantized state is not lossless; recurrent/activation fusion and all hardware low-bit kernels are not complete.",
+      "native_profile_acceptance": {
+        "status": "implemented_with_independent_tests",
+        "scope": "True INT8, FP8 E4M3FN/E5M2 per-token/head hot KV with native tiled dequantization; independent scalar/dense/whole-model oracles. Prior weight packing retained. Quantized state is not lossless; recurrent/activation fusion and all hardware low-bit kernels are not complete.",
+        "policy": "docs/TESTING.md",
+        "hardware_performance": "not_inferred_from_numerical_or_workflow_evidence"
+      }
+    },
+    {
+      "id": "inference.offload",
+      "title": "State/weight offload and materialization",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/offload.py",
+        "src/aster/inference/engine.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference_advanced.py",
+        "tests/unit/test_paged_offload.py"
+      ],
+      "notes": "PagedStateArchive preserves physical native/INT8/FP8 codes and scales; reserves capacity before transfer, publishes pages after completion, integrates continuous preemption, explicit recompute fallback, identity binding and cancellation cleanup. Existing typed archive retained. No asynchronous weight prefetch or measured GPU DMA-overlap claim.",
+      "native_profile_acceptance": {
+        "status": "implemented_with_independent_tests",
+        "scope": "PagedStateArchive preserves physical native/INT8/FP8 codes and scales; reserves capacity before transfer, publishes pages after completion, integrates continuous preemption, explicit recompute fallback, identity binding and cancellation cleanup. Existing typed archive retained. No asynchronous weight prefetch or measured GPU DMA-overlap claim.",
+        "policy": "docs/TESTING.md",
+        "hardware_performance": "not_inferred_from_numerical_or_workflow_evidence"
+      }
+    },
+    {
+      "id": "inference.multimodal",
+      "title": "Encoder caching, processors and mixed-modality requests",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/task_runners.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference_task_runners.py"
+      ],
+      "notes": "Typed field/latent/action/world runners and supported multimodal state; not every family can share generic KV slicing."
+    },
+    {
+      "id": "inference.service",
+      "title": "Local API and HTTP/SSE, authentication and strict validation",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/http.py",
+        "src/aster/inference/deployment.py",
+        "src/aster/inference/measurement.py"
+      ],
+      "tests": [
+        "tests/integration/test_serving_native.py",
+        "tests/integration/test_serving_deployment.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.backpressure",
+      "title": "Bounded admission/output, deadlines, cancellation and quotas",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/runner.py",
+        "src/aster/inference/state.py",
+        "src/aster/inference/engine.py"
+      ],
+      "tests": [
+        "tests/unit/test_inference.py",
+        "tests/unit/test_inference_advanced.py",
+        "tests/integration/test_serving_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.deployment",
+      "title": "Load/warmup/ready/drain/stop, atomic version switch and rollback",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/http.py",
+        "src/aster/inference/deployment.py",
+        "src/aster/inference/measurement.py"
+      ],
+      "tests": [
+        "tests/integration/test_serving_native.py",
+        "tests/integration/test_serving_deployment.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "inference.metrics",
+      "title": "Client/server latency, TTFT/ITL/TPOT/goodput and resource evidence",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/http.py",
+        "src/aster/inference/deployment.py",
+        "src/aster/inference/measurement.py"
+      ],
+      "tests": [
+        "tests/integration/test_serving_native.py",
+        "tests/integration/test_serving_deployment.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.state_machine",
+      "title": "Thread/turn/item lifecycle and event log",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/events.py",
+        "src/aster/agents/permissions.py",
+        "src/aster/agents/tools.py",
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents.py",
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.tools",
+      "title": "Strict tool schema, versions, timeouts and sanitized outputs",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/events.py",
+        "src/aster/agents/permissions.py",
+        "src/aster/agents/tools.py",
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents.py",
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.permissions",
+      "title": "Least-authority, approval binding and expiry",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/events.py",
+        "src/aster/agents/permissions.py",
+        "src/aster/agents/tools.py",
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents.py",
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.sandbox",
+      "title": "Actual process/filesystem/network isolation or explicit rejection",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/sandbox.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents_extensions.py"
+      ],
+      "notes": "Explicit Linux bubblewrap OS isolation provider; Windows rejects unsupported sandbox. Linux OS execution not tested on this Windows host."
+    },
+    {
+      "id": "agents.workspace",
+      "title": "Safe file/search/patch/command tools with path checks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/events.py",
+        "src/aster/agents/permissions.py",
+        "src/aster/agents/tools.py",
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents.py",
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.memory",
+      "title": "Context budget, retrieval, citations and compaction",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/memory.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents_extensions.py"
+      ],
+      "notes": "Native scoped BM25 retrieval, verified provenance and bounded context compaction; not arbitrary autonomous long-term memory equivalence."
+    },
+    {
+      "id": "agents.planning",
+      "title": "Plans, bounded child tasks and dependency handling",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/planning.py"
+      ],
+      "tests": [
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Bounded dependency DAG executes real child loops with resource budgets; no unbounded authority escalation."
+    },
+    {
+      "id": "agents.mcp",
+      "title": "MCP protocol transport and separately enforced permissions",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/mcp.py",
+        "src/aster/agents/mcp_stdio.py",
+        "src/aster/agents/mcp_context.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents_extensions.py",
+        "tests/unit/test_mcp_stdio.py",
+        "tests/unit/test_mcp_context.py"
+      ],
+      "notes": "Fixed MCP2025-06-18 HTTP tools plus real explicitly granted stdio process, bounded JSON/stderr, request deadline/cancel/failure lifecycle; paginated exact-URI resources, prompt argument validation, untrusted context labels, common permissions and receipts. Failed initialize is atomic and session generations revoke old context grants. No sampling/elicitation execution, persistent GET/replay, resource subscriptions or full cross-platform process sandbox.",
+      "native_profile_acceptance": {
+        "status": "implemented_with_independent_tests",
+        "scope": "Fixed MCP2025-06-18 HTTP tools plus real explicitly granted stdio process, bounded JSON/stderr, request deadline/cancel/failure lifecycle; paginated exact-URI resources, prompt argument validation, untrusted context labels, common permissions and receipts. Failed initialize is atomic and session generations revoke old context grants. No sampling/elicitation execution, persistent GET/replay, resource subscriptions or full cross-platform process sandbox.",
+        "policy": "docs/TESTING.md",
+        "hardware_performance": "not_inferred_from_numerical_or_workflow_evidence"
+      }
+    },
+    {
+      "id": "agents.verification",
+      "title": "Verifier feedback and failure classification",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/events.py",
+        "src/aster/agents/permissions.py",
+        "src/aster/agents/tools.py",
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents.py",
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.recovery",
+      "title": "Read-only replay, idempotency, crash ambiguity and resume",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/events.py",
+        "src/aster/agents/permissions.py",
+        "src/aster/agents/tools.py",
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents.py",
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.training",
+      "title": "Exact action token/logprob trajectory export",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "agents.security",
+      "title": "Injection/secret/symlink/SSRF/supply-chain negative tests",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/agents/events.py",
+        "src/aster/agents/permissions.py",
+        "src/aster/agents/tools.py",
+        "src/aster/agents/runtime.py"
+      ],
+      "tests": [
+        "tests/unit/test_agents.py",
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "evaluation.protocol",
+      "title": "Immutable benchmark/data/settings/processor/environment identity",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/protocol.py",
+        "src/aster/evaluation/metrics.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "evaluation.metrics",
+      "title": "Native metrics, valid denominators and interval estimation",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/protocol.py",
+        "src/aster/evaluation/metrics.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "evaluation.text",
+      "title": "Public LLM/code benchmarks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/language.py",
+        "src/aster/recipes.py"
+      ],
+      "tests": [
+        "tests/integration/test_recipe_chain.py",
+        "tests/unit/test_language_harness_contract.py",
+        "tests/parity/test_language_harness.py"
+      ],
+      "notes": "Native likelihood/generation and immutable model+tokenizer artifact bridge into actual lm-eval 0.4.12. Freezes pre-evaluation sample fingerprints, task config/source/version and all four seeds; retains missing failures, checks document identity and publishes linked EvaluationRun evidence. Real local MCQ fixture executed through official harness with repeatable fewshot and subset denominator; not public pretrained benchmark quality. Admitted artifact metric aggregation is samplewise acc/acc_norm/exact_match, not arbitrary benchmark metrics or executable-code authorization."
+    },
+    {
+      "id": "evaluation.multimodal",
+      "title": "Public VLM/image/video language tasks",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/adapters.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation_suites.py"
+      ],
+      "notes": "Pinned optional lmms-eval API adapter routes model work to native callback; public suites not executed."
+    },
+    {
+      "id": "evaluation.robotics",
+      "title": "Public VLA task suites and simulator adapters",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/adapters.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation_suites.py"
+      ],
+      "notes": "LIBERO adapter with BDDL/initstate identity and real reset/step API contract; no public robot score yet."
+    },
+    {
+      "id": "evaluation.world",
+      "title": "Prediction and actual control evaluation separately",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/suites.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation_suites.py"
+      ],
+      "notes": "Versioned episode protocol/evaluator with reset/step trajectories, full failure denominator and trace hashes; task-specific public world-model benchmarks remain."
+    },
+    {
+      "id": "evaluation.generative",
+      "title": "Public FID/KID/conditional/video metrics",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/protocol.py",
+        "src/aster/evaluation/metrics.py",
+        "src/aster/evaluation/generative.py",
+        "src/aster/evaluation/video_generation.py",
+        "src/aster/evaluation/interval_generation.py",
+        "src/aster/evaluation/drifting_generation.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation.py",
+        "tests/unit/test_evaluation_generative.py",
+        "tests/integration/test_video_generation_evaluation.py",
+        "tests/integration/test_interval_generation_evaluation.py",
+        "tests/integration/test_drifting_generation_evaluation.py"
+      ],
+      "notes": "Native image/video sampling, rank/full-cohort merging, immutable frame/condition/model provenance and offline official clean-fid/StyleGAN-V I3D adapters. Actual official extractor weights/dependencies not supplied; public FID/KID/FVD not run. Distribution-level scores are not invented as per-sample metrics. MeanFlow/Shortcut/Drifting/DMD training exports and native samplers have explicit contracts, source hashes, RNG-preserving publication, exact step/NFE and DP2/EMA tests."
+    },
+    {
+      "id": "evaluation.rl",
+      "title": "Multi-seed returns, IQM and sample efficiency",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/protocol.py",
+        "src/aster/evaluation/metrics.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "evaluation.agent",
+      "title": "Coding/tool/environment benchmarks with isolation",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/suites.py"
+      ],
+      "tests": [
+        "tests/integration/test_agents_native.py"
+      ],
+      "notes": "Real AgentLoop plus independent verifier and workspace identity, optional pinned SWE-bench harness; no public SWE-bench result claim."
+    },
+    {
+      "id": "evaluation.compression",
+      "title": "Teacher/student baseline and quality-resource Pareto",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/protocol.py",
+        "src/aster/evaluation/metrics.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation.py"
+      ],
+      "notes": "Native implementation present for the tested operations. The entire capability title and all architecture/configuration/hardware combinations are not yet certified; remaining requirements are retained."
+    },
+    {
+      "id": "evaluation.performance",
+      "title": "Workload-fixed repeated latency/memory/goodput",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/inference/http.py",
+        "src/aster/inference/deployment.py",
+        "src/aster/inference/measurement.py",
+        "src/aster/evaluation/generation_performance.py"
+      ],
+      "tests": [
+        "tests/integration/test_serving_native.py",
+        "tests/integration/test_serving_deployment.py",
+        "tests/integration/test_interval_generation_evaluation.py"
+      ],
+      "notes": "Native serving and image-sampler benchmark paths, explicit warmup, synchronized actual model-call count, latency and CUDA allocator memory where available; weight/cohort/environment/sampler code hashes bound. CPU missing GPU peak remains explicit, no invented throughput or multi-GPU claims. Full hardware performance qualification remains open."
+    },
+    {
+      "id": "evaluation.promotion",
+      "title": "Evidence-backed paired noninferiority and resource gates",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/evaluation/protocol.py",
+        "src/aster/evaluation/metrics.py",
+        "src/aster/evaluation/generation_gate.py"
+      ],
+      "tests": [
+        "tests/unit/test_evaluation.py",
+        "tests/unit/test_generation_gate.py"
+      ],
+      "notes": "Source/weight/cohort-matched quality-resource gate, recomputed official FID/KID, independent complete-cohort repetitions and uncertainty intervals; never fake per-image FID pairs. Missing resources/evidence returns not_evaluated. Actual public quality and GPU efficiency qualification remain open."
+    },
+    {
+      "id": "evaluation.contamination",
+      "title": "Train/eval deduplication, privacy and dataset licenses",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/data/contamination.py"
+      ],
+      "tests": [
+        "tests/unit/test_contamination.py"
+      ],
+      "notes": "Native exact/exhaustive near deduplication, probabilistic MinHash-LSH option, split manifests, declared license allowlist and HMAC-redacted PII findings. Does not certify legal compliance or absence of unknown pretraining contamination."
+    },
+    {
+      "id": "models.llada",
+      "title": "Native LLaDA masked-token diffusion",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/llada.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_llada_parity.py"
+      ],
+      "notes": "Native tested public subgraphs only; all checkpoint variants, production quality and GPU kernels are not certified."
+    },
+    {
+      "id": "models.qwen35",
+      "title": "Native Qwen3.5 dense/MoE and multimodal composition",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/qwen35.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_qwen35_parity.py"
+      ],
+      "notes": "Native tested public subgraphs only; all checkpoint variants, production quality and GPU kernels are not certified."
+    },
+    {
+      "id": "models.deepseek_v4",
+      "title": "Native public V4 mHC compressed attention hash-MoE",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/deepseek_v4.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_v4_parity.py"
+      ],
+      "notes": "Native tested public subgraphs only; all checkpoint variants, production quality and GPU kernels are not certified."
+    },
+    {
+      "id": "models.tdmpc2",
+      "title": "TD-MPC2 implicit world model, value/policy training and MPPI",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/tdmpc2.py",
+        "src/aster/methods/tdmpc2.py"
+      ],
+      "tests": [
+        "tests/unit/test_tdmpc2.py"
+      ],
+      "notes": "Native state/RGB64, SimNorm, two-hot reward/Q ensemble, task masks, two-role updates, target-Q, value scale and policy-guided MPPI. Formula/workflow and exact resume tests; no original full-package or public control benchmark execution."
+    },
+    {
+      "id": "methods.masked_diffusion",
+      "title": "LLaDA masked-token diffusion training and sampling",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/masked_diffusion.py"
+      ],
+      "tests": [
+        "tests/unit/test_masked_diffusion.py"
+      ],
+      "notes": "Native inverse masking-probability training, prompt protection, SFT/pretrain normalization, blockwise generation and explicit sampling. Public pretrained benchmark quality not claimed."
+    },
+    {
+      "id": "methods.flow_transport",
+      "title": "Native minibatch OT-CFM, flow inversion and likelihood",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/methods/flow_transport.py"
+      ],
+      "tests": [
+        "tests/unit/test_flow_transport.py"
+      ],
+      "notes": "Exact uniform Hungarian, balanced log-Sinkhorn with explicit convergence, forward/reverse Euler/Heun/RK4 and fixed-probe/exact divergence continuous likelihood. Four tests include analytic density and real DiT OT training. No large-scale GPU OT or stochastic-SDE likelihood claim."
+    },
+    {
+      "id": "models.gemma4",
+      "title": "Native Gemma4 text, multimodal extensions tracked separately",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/models/gemma4.py",
+        "src/aster/models/gemma4_vl.py",
+        "src/aster/inference/gemma4.py"
+      ],
+      "tests": [
+        "tests/parity/test_models_gemma4_parity.py",
+        "tests/parity/test_models_gemma4_vl_parity.py",
+        "tests/unit/test_inference_gemma4.py",
+        "tests/integration/test_serving_gemma4.py"
+      ],
+      "notes": "Native text/image/video with real Transformers same-weight/all-gradient/cache oracle. Typed owner snapshots, full visual-block prefill, real-byte COW/prefix scope, replay rollback/preemption and text HTTP/SSE tested. Audio and unified audio/video generation are not implied; GPU kernels/throughput remain unmeasured."
+    },
+    {
+      "id": "models.kimi_k3",
+      "title": "Kimi K3 KDA/Gated-MLA/AttnRes/Stable LatentMoE/MoonViT-V2",
+      "sources": [
+        "https://github.com/MoonshotAI/Kimi-K3",
+        "https://www.kimi.com/news/kimi-k3-open-source",
+        "https://github.com/sgl-project/sglang/blob/fe694986a296787cb0ada3b8cd7b6dccd21de72a/python/sglang/srt/models/kimi_k3.py",
+        "https://github.com/sgl-project/sglang/blob/fe694986a296787cb0ada3b8cd7b6dccd21de72a/python/sglang/srt/models/kimi_k3_vl.py"
+      ],
+      "notes": "Native vector-decay KDA, gated NoPE MLA, AttnRes, SiTU/stable LatentMoE and distinct MoonViT-V2/visual connector. Pinned SGLang/FLA independent full functional output/all-gradient tests, FP32/BF16 visual bitwise checks, cache and ZeRO0/3 single-rank training/export/resume. Not a K2.5 alias; no actual SGLang execution, distributed family provider or public model quality claim.",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "paths": [
+        "src/aster/nn/kda.py",
+        "src/aster/models/kimi_k3.py",
+        "src/aster/models/kimi_k3_vl.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_k3.py",
+        "tests/parity/test_models_k3_parity.py",
+        "tests/unit/test_models_k3_vl.py",
+        "tests/parity/test_models_k3_vl_parity.py"
+      ]
+    },
+    {
+      "id": "models.qwen38_flash_next",
+      "title": "Qwen3.8-Flash-Next QSA, four-branch gated residual and n-gram embedding",
+      "sources": [
+        "https://github.com/QwenLM/Qwen3.8-Flash-Next"
+      ],
+      "notes": "Source-locked native QSA/GDN, four-stream gated residual, EOS-reset n-gram PLE, typed text/vision cache, actual indexer KL training, visual/token gradients, ZeRO0/3 training/resume and local serialization. Independent complete formulas plus actual Transformers vision/GDN subgraph oracles; installed Transformers lacks full architecture runtime. Remaining: giant production checkpoints, host-offloaded asynchronous n-gram cache, hybrid MTP, GPU kernels/performance and full upstream configurations.",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "paths": [
+        "src/aster/models/qwen4_exp.py",
+        "src/aster/models/qwen4_exp_vl.py",
+        "src/aster/methods/sparse_indexer.py",
+        "docs/MODELS.md"
+      ],
+      "tests": [
+        "tests/unit/test_models_qwen4exp.py",
+        "tests/unit/test_models_qwen4exp_vl.py",
+        "tests/parity/test_models_qwen4exp_parity.py",
+        "tests/parity/test_models_qwen4exp_vl_parity.py"
+      ]
+    },
+    {
+      "id": "models.deepseek_ocr2",
+      "title": "DeepSeek OCR2 visual causal flow and document generation",
+      "sources": [
+        "https://github.com/deepseek-ai/DeepSeek-OCR-2"
+      ],
+      "notes": "Native SAM+visual reading-order Qwen2+projector+non-MLA DeepSeekV2 MHA/MoE, official local-tiles then global view order, safe data parsing and configuration mapping. Actual Transformers SAM/Qwen2 subgraph gradients, full formula tests, real DP2 uneven local tiles ZeRO0-3 and exact resume. Remaining: production checkpoint/document quality protocol, broader preprocessing/prompt combinations and actual GPU serving/performance.",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "paths": [
+        "src/aster/nn/sam.py",
+        "src/aster/models/ocr2_vision.py",
+        "src/aster/models/ocr2.py",
+        "src/aster/data/ocr.py",
+        "docs/MODELS.md"
+      ],
+      "tests": [
+        "tests/unit/test_models_ocr2_vision.py",
+        "tests/unit/test_models_ocr2.py",
+        "tests/unit/test_models_ocr2_io.py",
+        "tests/unit/test_models_ocr2_distributed.py",
+        "tests/parity/test_models_ocr2_vision_parity.py",
+        "tests/parity/test_models_ocr2_parity.py"
+      ]
+    },
+    {
+      "id": "models.blip2",
+      "title": "BLIP-2 vision, Q-Former and T5/native Llama composition",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/salesforce/LAVIS",
+        "https://github.com/huggingface/transformers"
+      ],
+      "paths": [
+        "src/aster/models/blip2.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_blip2.py",
+        "tests/parity/test_models_blip2_parity.py"
+      ],
+      "notes": "Native learned-query cross attention and separate text FFN, exact official complete T5/Llama and subgraph oracles, visual gradients through frozen LM, train/save/resume. OPT and additional captioning/pretraining stage workflows are not silently inferred."
+    },
+    {
+      "id": "methods.mtp",
+      "title": "Joint next-token and sequential multi-token prediction with shared parameters",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/models/qwen3_5_mtp.py",
+        "https://arxiv.org/abs/2412.19437"
+      ],
+      "paths": [
+        "src/aster/models/qwen_mtp.py",
+        "src/aster/methods/mtp.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_qwen_mtp.py",
+        "tests/parity/test_models_qwen_mtp_parity.py",
+        "tests/unit/test_mtp_objective.py"
+      ],
+      "notes": "Native Qwen draft layers with independent state, Transformers layer/base oracle plus head formula. Joint objective checks future-target masks/per-depth integer counts. Explicit GDN parameter owner/name codec and distinct modules sharing Parameters support ZeRO3 save/export. SGD full-vs-accumulation checks plus formal Adam exact resume pass; no GPU speculative speed claim."
+    },
+    {
+      "id": "core.native_boundary",
+      "title": "Static guard against accidental high-level external framework wrappers",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [],
+      "paths": [
+        "src/aster/core/native_boundary.py"
+      ],
+      "tests": [
+        "tests/unit/test_native_boundary.py"
+      ],
+      "notes": "AST checks direct/lazy imports; core relies on torch/numpy/stdlib. Explicit low-level safetensors format reader and optional image codec/evaluation dependencies are allowed. This is neither an OS sandbox nor a proof of numerical or hardware equivalence."
+    },
+    {
+      "id": "models.muzero",
+      "title": "Native MuZero model, PUCT/Gumbel search, reanalysis and replay training",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://arxiv.org/html/1911.08265v2",
+        "https://github.com/google-deepmind/mctx"
+      ],
+      "paths": [
+        "src/aster/models/muzero.py",
+        "src/aster/methods/muzero.py",
+        "src/aster/methods/muzero_replay.py",
+        "src/aster/planning/mcts.py"
+      ],
+      "tests": [
+        "tests/unit/test_muzero.py",
+        "tests/unit/test_mcts.py",
+        "tests/integration/test_muzero_replay.py",
+        "tests/parity/test_planning_mctx.py"
+      ],
+      "notes": "Explicit vector-MLP h/g/f instance with scalar/support transforms, half hidden gradients, native batched PUCT/Gumbel, snapshot+RNG identity, terminal/truncation-aware episode reanalysis -> nstep/PER -> Trainer and whole ZeRO0/3 exact restore. Tiny bandit learns via own search policy targets; not Atari/board architecture, async self-play system or public benchmark equivalence. Actual mctx 0.0.71/JAX 0.11.1 MuZero and Gumbel tree/value/policy parity executed successfully in a separate oracle environment (zero root noise, 13 simulations, depth 2); runtime remains native Torch. Cross-framework sampled PUCT actions are not claimed seed-identical."
+    },
+    {
+      "id": "models.world_models_vmc",
+      "title": "Original World Models VAE/MDN-RNN/controller training",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/hardmaru/WorldModelsExperiments/tree/fd982b9691a941b52c6addbde29bc801ca6202c8",
+        "https://github.com/tensorflow/tensorflow/blob/v1.8.0/tensorflow/contrib/rnn/python/ops/rnn_cell.py",
+        "https://github.com/CMA-ES/pycma/blob/master/cma/purecma.py"
+      ],
+      "paths": [
+        "src/aster/models/vmc.py",
+        "src/aster/methods/vmc.py",
+        "src/aster/methods/vmc_stream.py",
+        "src/aster/planning/vmc.py",
+        "src/aster/optimization/evolution.py",
+        "docs/VMC.md"
+      ],
+      "tests": [
+        "tests/unit/test_vmc.py",
+        "tests/unit/test_evolution.py",
+        "tests/parity/test_vmc_parity.py",
+        "tests/distributed/test_vmc_distributed.py",
+        "tests/unit/test_vmc_stream.py",
+        "tests/distributed/test_vmc_stream_distributed.py"
+      ],
+      "notes": "Native non-driving VAE/mu-logvar encoding, independent-coordinate Gaussian-mixture LSTM/restart, official elementwise clip, CMA-ES dream controller search. Native legacy-disjoint TBPTT episode shuffling/chunk carry preserves author's skipped boundary transition, data/RNG/pending cursor and carries registered in shared checkpoint. FP32/BF16, real DP2 ZeRO0-3 unequal rows/accumulated chunks, actual upstream create_batches oracle, failure no-miscommit, exact resume and learned synthetic control tested. Remaining: original TF weights/data import, real game collection/benchmark, distributed candidate evaluation, cross-topology streaming state and CUDA performance; not complete pycma or public Doom-score equivalence."
+    },
+    {
+      "id": "models.planet",
+      "title": "Continuous Gaussian RSSM, overshooting and PlaNet planning",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/google-research/planet/tree/c04226b6db136f5269625378cd6a0aa875a92842",
+        "https://github.com/tensorflow/tensorflow/blob/v1.13.1/tensorflow/contrib/rnn/python/ops/gru_ops.py"
+      ],
+      "paths": [
+        "src/aster/models/planet.py",
+        "src/aster/methods/planet.py",
+        "src/aster/methods/planet_loop.py",
+        "src/aster/planning/planet.py",
+        "docs/PLANET.md"
+      ],
+      "tests": [
+        "tests/unit/test_planet.py",
+        "tests/parity/test_planet_parity.py",
+        "tests/distributed/test_planet_distributed.py",
+        "tests/unit/test_planet_loop.py",
+        "tests/distributed/test_planet_loop_distributed.py"
+      ],
+      "notes": "Native continuous Gaussian RSSM, exact TF reset-before GRU, pixel likelihood, free-nats, latent overshooting and CEM. Native same-row action/reward episode collection, raw-pixel replay, author contiguous chunk offsets, random seeding, exploration and training/refresh/MPC orchestration. Actual simulator/replay/latent belief/private RNG mid-episode checkpoint, FP32/BF16 and real DP2 all ZeRO0-3 unequal batch updates/resume; 22 package tests. Invalid/cross-episode overshooting pairs explicitly excluded unlike old upstream unmasked mean. Remaining: TF1 runtime/checkpoint mapping, public DMControl quality, asynchronous/NVMe replay, cross-topology simulator migration, model parallelism and GPU/multihost performance."
+    },
+    {
+      "id": "models.cosmos",
+      "title": "Source-admitted Cosmos world-model families and conditioning",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "formula_and_workflow_tests",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://github.com/huggingface/diffusers/tree/c1bf18c92c6285334adcaac7e75ef8946a227f49",
+        "https://github.com/NVIDIA/cosmos/tree/e7ad5e77eecd47acadf17db47d6eb56282a099cc",
+        "https://github.com/NVIDIA/Cosmos/tree/724daa1b2df5ec96bdf111bb947479d2216b3b08",
+        "https://github.com/NVIDIA/cosmos-framework/tree/0e034bc98ffa3c3dfa19f037871f3a8bbc1c4d05"
+      ],
+      "paths": [
+        "src/aster/models/cosmos3.py",
+        "src/aster/methods/cosmos3.py",
+        "src/aster/models/cosmos_predict1.py",
+        "src/aster/methods/cosmos_predict1.py",
+        "src/aster/models/wan22_vae.py",
+        "docs/MODELS.md",
+        "src/aster/models/cosmos3_vlm.py",
+        "src/aster/models/cosmos3_audio.py",
+        "src/aster/models/serialization.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_cosmos3.py",
+        "tests/parity/test_models_cosmos3_parity.py",
+        "tests/unit/test_models_cosmos3_distributed.py",
+        "tests/unit/test_models_cosmos_predict1.py",
+        "tests/parity/test_models_cosmos_predict1_parity.py",
+        "tests/unit/test_models_cosmos_predict1_distributed.py",
+        "tests/unit/test_models_wan22_vae.py",
+        "tests/unit/test_models_wan22_distributed.py",
+        "tests/unit/test_models_cosmos3_video_pipeline.py",
+        "tests/parity/test_models_wan22_vae_parity.py",
+        "tests/unit/test_models_cosmos3_vlm.py",
+        "tests/parity/test_models_cosmos3_vlm_parity.py",
+        "tests/unit/test_models_cosmos3_vlm_distributed.py",
+        "tests/unit/test_models_cosmos3_audio.py",
+        "tests/parity/test_models_cosmos3_audio_parity.py",
+        "tests/unit/test_models_cosmos3_audio_distributed.py",
+        "tests/unit/test_models_cosmos3_audio_video_pipeline.py",
+        "tests/unit/test_models_runtime_buffers.py",
+        "tests/unit/test_objective_factory_codecs.py"
+      ],
+      "notes": "Cosmos3 native understanding/generation MoT, joint vision/sound/action latent attention, MRoPE, domains, typed cache and joint flow. Predict1 separate GeneralDIT, AdaLN-LoRA, FPS/NTK/axis positions, Fourier logvar/Kendall EDM and Euler sampler. Native distinct Wan2.2 causal video codec, raw video to trained MoT to reloaded artifacts to decoded video; low-precision KL statistics accumulated in FP32. Independent all-gradient formulas, actual Transformers understanding oracle, real DP2 ZeRO0-3 and exact restore. Qwen3Vision/DeepStack actual image/video understanding now joins the same MoT with typed cache/rope delta, Transformers logits/all-gradient oracles, DP2 unequal grids and BF16 exact save/load. Native AVAE2 STFT/ConvNeXt/SnakeBeta audio codec with exact source softplus posterior and twice-Gaussian-KL normalization; same MoT audio-video training and three-artifact reload/decode, independent gradients and DP2 ZeRO0-3. Whole-batch peak normalization is explicitly rejected by decomposable objectives. Semantic nonpersistent RoPE buffers are content-bound on model save/load, including BF16-rounded values. Remaining: original codec adversarial/perceptual pretraining, multi-segment packing, distilled weights/UniPC, dedicated CP kernels and public quality/GPU evidence; no Wan denoiser alias equivalence."
+    },
+    {
+      "id": "models.genie",
+      "title": "Latent-action generative world models; distinguish paper-only and released code",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "public_mechanism_tests_not_unreleased_model_equivalence",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "sources": [
+        "https://arxiv.org/html/2402.15391v1",
+        "https://deepmind.google/models/genie/",
+        "https://github.com/google-research/maskgit/tree/1db23594e1bd328ee78eadcd148a19281cd0f5b8",
+        "https://github.com/google-deepmind/sonnet/blob/v2/sonnet/src/nets/vqvae.py"
+      ],
+      "paths": [
+        "src/aster/models/genie.py",
+        "src/aster/methods/genie.py",
+        "src/aster/planning/genie.py",
+        "src/aster/evaluation/genie_world.py",
+        "docs/GENIE.md",
+        "src/aster/methods/genie_artifact_training.py",
+        "src/aster/evaluation/genie_generation.py",
+        "docs/GENIE_ARTIFACTS.md",
+        "docs/TESTING.md"
+      ],
+      "tests": [
+        "tests/unit/test_genie.py",
+        "tests/parity/test_genie_parity.py",
+        "tests/distributed/test_genie_distributed.py",
+        "tests/integration/test_genie_generation_evaluation.py",
+        "tests/integration/test_genie_artifact_distributed.py"
+      ],
+      "notes": "Native public Genie2024-mechanism instance: causal ST VQ video tokenizer, pixel latent-action VQ, stopgradient joint world objective, MaskGIT and pixel-to-video rollout; paired delta-PSNR evaluation. FP64 formula/all-gradient, FP32/BF16/ZeRO and real DP2 all ZeRO unequal-count training/resume tests. No official Genie training code/checkpoints obtained: positional encoding, pooling, normalization and exact loss alignment are declared instance choices, not internal-model equivalence. Native trained/EMA codec artifacts -> raw-video corpus -> per-row reencoding trace -> bound world objective -> native checkpoint -> source-bound generation/pixel/PNG receipts. Real DP2 ZeRO3 missing/invalid trace and bad later microbatch reject symmetrically before model collectives. Same-cohort paired delta-PSNR, measured rollout/NFE/latency, exact train-pixel duplicate checks; missing official FVD/control resources are not_evaluated, not quality promotion. Remaining: dedicated distillation objective, long interaction, BC mapping, official runtime/weights, public FVD/control, TP/CP/GPU performance; Genie3 is not replicated."
+    },
+    {
+      "id": "models.dspark",
+      "title": "DeepSeek DSpark draft training and confidence-scheduled speculative decoding",
+      "sources": [
+        "https://github.com/deepseek-ai/DeepSpec/tree/005e03b81cec38b7da6399833d609ee89a2587f2",
+        "https://arxiv.org/abs/2607.05147"
+      ],
+      "notes": "Native Qwen3/Gemma4 DSpark, three Markov heads, confidence, source loss/default microbatch normalization, optional explicitly different global-window/skip profiles. Actual target-feature cache, pure DP/ZeRO0-3 update/fresh resume, strict weight import, immutable training/deployment lineage, incremental context KV, exact target rejection/resampling and Qwen truncate/Gemma actual replay, paired latency/quality reports. Source oracle and CPU workflows tested; no production weights/public task quality/GPU performance/TP-PP training/continuous DSpark scheduler claims. See docs/DSPARK.md.",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_source_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "paths": [
+        "src/aster/models/dspark.py",
+        "src/aster/models/dspark_gemma4.py",
+        "src/aster/models/dspark_import.py",
+        "src/aster/nn/markov.py",
+        "src/aster/data/dspark.py",
+        "src/aster/methods/dspark.py",
+        "src/aster/methods/dspark_artifacts.py",
+        "src/aster/inference/dspark.py",
+        "src/aster/evaluation/dspark.py",
+        "examples/dspark_pipeline.py"
+      ],
+      "tests": [
+        "tests/parity/test_dspark_official.py",
+        "tests/parity/test_models_dspark_gemma4_parity.py",
+        "tests/unit/test_dspark_normalization.py",
+        "tests/unit/test_dspark_training.py",
+        "tests/unit/test_dspark_import.py",
+        "tests/unit/test_dspark_inference.py",
+        "tests/distributed/test_dspark_distributed.py",
+        "tests/integration/test_dspark_pipeline.py",
+        "tests/integration/test_dspark_gemma4_pipeline.py"
+      ]
+    },
+    {
+      "id": "models.lewm",
+      "title": "LeWorldModel end-to-end pixel JEPA, SIGReg and goal planning",
+      "sources": [
+        "https://github.com/lucas-maes/le-wm/tree/8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+        "https://arxiv.org/abs/2603.19312"
+      ],
+      "notes": "Native end-to-end pixel encoder/action predictor without stopgradient/EMA, author global SIGReg, BN statistics/affine ownership under ZeRO3, pure-DP global-batch Method, action normalization and author-style latent-goal CEM. Actual 300-step synthetic visual-control workflow and author/HF oracles; full global activations replicated, not memory-saving microbatching. No public PushT/TwoRooms scores, large pretrained weights or GPU scaling claim.",
+      "required": true,
+      "implementation": "partial",
+      "equivalence": "official_source_oracle_tested_domain",
+      "integration": "tested_subset",
+      "performance": "not_measured",
+      "paths": [
+        "src/aster/models/vit.py",
+        "src/aster/models/lewm.py",
+        "src/aster/methods/lewm.py",
+        "src/aster/planning/lewm.py",
+        "src/aster/data/lewm.py",
+        "examples/lewm_pipeline.py"
+      ],
+      "tests": [
+        "tests/unit/test_models_lewm.py",
+        "tests/unit/test_models_lewm_distributed.py",
+        "tests/parity/test_models_lewm_parity.py"
+      ]
+    }
+  ],
+  "functional_acceptance_policy": "An implemented, precisely scoped native profile can be accepted from independent formulas/gradients/workflow evidence without GPU measurements. Missing implementation remains incomplete; broad capability titles are not silently narrowed."
+}

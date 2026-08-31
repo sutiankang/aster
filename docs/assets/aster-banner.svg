@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" role="img" aria-labelledby="title desc">
+<title id="title">Aster</title>
+<desc id="desc">A native PyTorch framework connecting models, training, inference, and evaluation. A geometric eight-ray aster marks a shared center.</desc>
+<rect width="1200" height="280" rx="8" fill="#f4f1e9"/>
+<path d="M56 224H1144" stroke="#c9c6bc"/>
+<text x="58" y="54" fill="#48615c" font-family="Consolas,monospace" font-size="13" letter-spacing="3">NATIVE PYTORCH / CONNECTED ML</text>
+<text x="54" y="151" fill="#182e35" font-family="Georgia,serif" font-size="108" letter-spacing="-5">aster</text>
+<text x="61" y="193" fill="#415750" font-family="Georgia,serif" font-size="25">From first principles to complete workflows.</text>
+<text x="60" y="252" fill="#53645d" font-family="Consolas,monospace" font-size="12" letter-spacing="2">MODEL · TRAIN · COMPRESS · SERVE · EVALUATE</text>
+<g transform="translate(1006 130)">
+<circle r="93" fill="none" stroke="#d6d4c7"/>
+<circle r="66" fill="none" stroke="#d6d4c7"/>
+<g fill="#b77b37">
+<path d="M0-78 12-29 0-12-12-29Z"/>
+<path d="M0-78 12-29 0-12-12-29Z" transform="rotate(45)"/>
+<path d="M0-78 12-29 0-12-12-29Z" transform="rotate(90)"/>
+<path d="M0-78 12-29 0-12-12-29Z" transform="rotate(135)"/>
+<path d="M0-78 12-29 0-12-12-29Z" transform="rotate(180)"/>
+<path d="M0-78 12-29 0-12-12-29Z" transform="rotate(225)"/>
+<path d="M0-78 12-29 0-12-12-29Z" transform="rotate(270)"/>
+<path d="M0-78 12-29 0-12-12-29Z" transform="rotate(315)"/>
+</g>
+<circle r="10" fill="#182e35"/>
+</g>
+</svg>

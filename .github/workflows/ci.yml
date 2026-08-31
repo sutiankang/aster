@@ -1,0 +1,51 @@
+name: CPU checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cpu-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.13']
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install CPU runtime and test dependencies
+        run: |
+          python -m pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e '.[test,dev]'
+      - name: Check source and documentation
+        run: |
+          python tools/check_repository.py
+          ruff check src tests examples tools
+          ruff format --check src tests examples tools
+      - name: Test native CPU workflows
+        run: python -m pytest tests/unit tests/integration -q --junitxml=cpu-results.xml
+      - name: Build and validate distributions
+        run: |
+          python -m build
+          python -m twine check dist/*

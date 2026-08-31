@@ -1,0 +1,22 @@
+name: Feature proposal
+description: Propose one supported workflow or implementation.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Workflow and problem
+      description: What would this let you do that the current APIs cannot?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Proposed scope
+      description: Models, devices, input semantics, dependencies, and limitations.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Primary references and validation plan
+      description: Official code or paper, license, and a numerical/workflow test.

@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a reproducible problem in a native Aster workflow.
+body:
+  - type: markdown
+    attributes:
+      value: Please remove secrets, private data, and personal paths. Report security issues privately as described in SECURITY.md.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Revision, Python/PyTorch versions, OS, device, parallel layout.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: A small script or configuration and the command that fails.
+      render: python
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Error or traceback
+      render: text

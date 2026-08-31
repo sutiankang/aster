@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 350" role="img" aria-labelledby="title desc">
+<title id="title">One connected stack</title>
+<desc id="desc">Language, vision, action, world and generative models share objectives and a trainer. An immutable artifact feeds serving and evaluation. Compression returns to training through a new objective.</desc>
+<rect width="1120" height="350" rx="8" fill="#f4f1e9"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#48615c"/></marker></defs>
+<text x="38" y="38" fill="#48615c" font-family="Consolas,monospace" font-size="13" letter-spacing="2">A SHARED LIFECYCLE, DIFFERENT MATHEMATICS</text>
+<g font-family="Georgia,serif" font-size="23" fill="#182e35">
+<rect x="38" y="85" width="212" height="152" rx="5" fill="#e5e9dd" stroke="#c3cebd"/>
+<text x="58" y="119" font-size="20">Models + objectives</text>
+<g font-family="Consolas,monospace" font-size="13" fill="#48615c">
+<text x="58" y="153">Language · Vision</text><text x="58" y="177">Action · World</text><text x="58" y="201">Generative models</text>
+</g>
+<rect x="302" y="116" width="174" height="90" rx="5" fill="#fffdf8" stroke="#c9c6bc"/>
+<text x="327" y="154">Trainer</text><text x="327" y="180" font-family="Consolas,monospace" font-size="12">update + checkpoint</text>
+<rect x="528" y="116" width="174" height="90" rx="5" fill="#182e35"/>
+<text x="553" y="154" fill="#f4f1e9">Artifact</text><text x="553" y="180" fill="#c7d4ca" font-family="Consolas,monospace" font-size="12">weights + identity</text>
+<rect x="754" y="116" width="140" height="90" rx="5" fill="#fffdf8" stroke="#c9c6bc"/>
+<text x="778" y="154">Serving</text><text x="778" y="180" font-family="Consolas,monospace" font-size="12">state + requests</text>
+<rect x="946" y="116" width="136" height="90" rx="5" fill="#e5e9dd" stroke="#c3cebd"/>
+<text x="966" y="154">Evaluate</text><text x="966" y="180" font-family="Consolas,monospace" font-size="12">quality + cost</text>
+</g>
+<g stroke="#48615c" stroke-width="1.8" fill="none" marker-end="url(#arrow)">
+<path d="M250 161H296"/><path d="M476 161H522"/><path d="M702 161H748"/><path d="M894 161H940"/>
+<path d="M615 211V277H389V211" stroke-dasharray="5 5"/>
+</g>
+<rect x="421" y="260" width="165" height="32" rx="3" fill="#f4f1e9"/>
+<text x="434" y="282" fill="#89602c" font-family="Consolas,monospace" font-size="14">compress / distill</text>
+<text x="38" y="326" fill="#53645d" font-family="Georgia,serif" font-size="17">Track model identity, state, and evaluation across stages.</text>
+</svg>

@@ -1,0 +1,13 @@
+include README.md README.zh-CN.md NOTICE.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md SUPPORT.md CHANGELOG.md
+include pyproject.toml .editorconfig .gitattributes
+recursive-include src *.py
+recursive-include examples *.py *.json *.jsonl
+recursive-include tests *.py
+recursive-include tools *.py
+recursive-include docs *.md *.txt *.json *.svg
+global-exclude *.py[cod]
+global-exclude *.pt *.pth *.safetensors
+prune runs
+prune artifacts
+prune .pytest_cache
+prune .ruff_cache
